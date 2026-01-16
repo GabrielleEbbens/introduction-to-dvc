@@ -1,0 +1,19 @@
+[project]
+name = "dvc-intro-pydata"
+version = "0.1.0"
+description = "Project to show how to use DVC for Pydata presentation"
+authors = [
+    {name = "Gabrielle Ebbens"}
+]
+readme = "README.md"
+requires-python = "==3.9.21"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.dependencies]
+pandas = "^2.3.3"
+dvc = "^3.66.1"
