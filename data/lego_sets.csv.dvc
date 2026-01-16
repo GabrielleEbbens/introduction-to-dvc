@@ -1,0 +1,5 @@
+outs:
+- md5: 1e4a4d5eeef278924200ef0c4e62f42c
+  size: 18675351
+  hash: md5
+  path: lego_sets.csv
