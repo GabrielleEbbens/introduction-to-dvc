@@ -1,0 +1,76 @@
+---
+title: "An Introduction to Data Version Control (DVC)"
+author: "Gabrielle Ebbens"
+date: "2026-02-12"
+format: revealjs
+---
+
+# How is version control used currently?
+
+The most common method of version control is git, which consists of:
+
+- A repository (repo) containing the project files and history
+- Commits - snapshots of the project files at a given point in time
+- Branches - a parallel line of development where you can work on features and not affect the main codebase.
+- A remote repository (e.g. GitHub, GitLab, Bitbucket) for collaboration
+
+#
+
+- In software development, version control is used to keep track of changes to code files. 
+- These files can be easily stored in a git repository. This is like keeping a photos in a photo album (put a picture here).
+- You might be thinking "We know how to keep track of code. But what about data and models?"
+
+# What makes version control difficult in data science?
+
+- Data science models are affected by a combination of data AND code, making version history more complex.
+- There are infinite ways to change a dataset and models, meaning that there are A LOT of changes to keep track of.
+- Many small changes to data may mean that we have lots of files named slightly differently (e.g. data.csv, data_2.csv, data_final.csv, data_final_the_finalest_version_of_final.csv).
+- Data Scientists work with HUGE datasets, which are often too large to store in a git repository. It would be like trying to stick the yellow pages in a photo album.
+
+# Is there a better way to keep track of data and models?
+
+There is, Kevin! (Insert Joey gif here)
+
+# Introducing DVC
+
+Data Version Control (DVC) is:
+
+- An open-source tool owned by LakeFS that allows git-like versioning of data, models and pipelines.
+- It tracks the metadata of the data and models, while the actual data and models are stored in a remote storage (e.g. S3, Google Drive, Azure Blob Storage, locally).
+    - Instead of storing the yellow pages in a photo album, we can store information of the yellow pages in a photo album while storing the actual yellow pages in the cloud.
+- It works together with git: git tracks the metadata of the data and models, while DVC tracks the actual data and models.
+
+# How does DVC keep track of data and models?
+
+To see how it works, we'll set up a basic DVC repo and add a dataset to it.
+
+## Initialize a DVC repo
+
+```bash
+dvc init
+```
+
+- This creates a .dvc directory. This contains a config (more on this later) file and a cache (insert screenshot of .dvc directory here).
+
+## Add a dataset to the DVC repo
+
+```bash
+dvc add data/lego_sets.csv
+```
+- This creates a .dvc file containing the metadata of the dataset. You will also be prompted to add a .gitignore file in your data directory (this will ensure that the actual dataset is not stored in your git repository).
+
+## Configure DVC to use a remote storage
+
+```bash
+dvc remote add -d /Users/gabrielleebbens/dvc-remote-storage
+```
+- This configures DVC to use a remote storage.
+- The -d flag means that this is the default remote storage.
+- The path is the path to the remote storage.
+
+## Push the dataset to the remote storage
+
+```bash
+dvc push
+```
+- This pushes the dataset to the remote storage (yaaaaaaay!)
