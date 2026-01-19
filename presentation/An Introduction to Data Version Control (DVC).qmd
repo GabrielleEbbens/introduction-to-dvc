@@ -42,9 +42,17 @@ Data Version Control (DVC) is:
 
 # How does DVC keep track of data and models?
 
-To see how it works, we'll set up a basic DVC repo and add a dataset to it.
+To see how it works, we'll set up a basic DVC project. This demo will cover:
 
-## Initialize a DVC repo
+- Initialize a DVC project
+- Add a dataset to the DVC project
+- Configure DVC to use a remote storage
+- Commands such as `dvc push`, `dvc pull`, `dvc checkout`
+- How to set up dvc pipelines
+
+## Project setup and adding data
+
+**Initialize a DVC project**
 
 ```bash
 dvc init
@@ -52,14 +60,16 @@ dvc init
 
 - This creates a .dvc directory. This contains a config (more on this later) file and a cache (insert screenshot of .dvc directory here).
 
-## Add a dataset to the DVC repo
+**Add a dataset to the DVC repo**
 
 ```bash
 dvc add data/lego_sets.csv
 ```
 - This creates a .dvc file containing the metadata of the dataset. You will also be prompted to add a .gitignore file in your data directory (this will ensure that the actual dataset is not stored in your git repository).
 
-## Configure DVC to use a remote storage
+## Setting up a remote DVC repository
+
+**Configure DVC to use a remote storage**
 
 ```bash
 dvc remote add -d /Users/gabrielleebbens/dvc-remote-storage
@@ -68,9 +78,24 @@ dvc remote add -d /Users/gabrielleebbens/dvc-remote-storage
 - The -d flag means that this is the default remote storage.
 - The path is the path to the remote storage.
 
-## Push the dataset to the remote storage
+**Push the dataset to the remote storage**
 
 ```bash
 dvc push
 ```
-- This pushes the dataset to the remote storage (yaaaaaaay!)
+- This pushes the dataset to the remote storage (insert screenshot of .dvc directory here).
+
+**Pull the dataset from the remote storage**
+
+```bash
+dvc pull
+```
+- This pulls the latest version of the dataset from the remote storage (insert screenshot of .dvc directory here).
+
+**Checkout a previous version of the dataset**
+
+```bash
+git checkout <commit sha>
+dvc checkout
+```
+- This checks out the version of the dataset that was used in the specified commit.
