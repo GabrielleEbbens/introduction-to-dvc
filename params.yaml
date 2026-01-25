@@ -1,0 +1,3 @@
+featurize:
+  split_ratio: 0.25
+  random_state: 42

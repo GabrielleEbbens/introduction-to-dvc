@@ -18,23 +18,21 @@ def train_model(features_train, targets_train):
     return model
 
 
-def save_model_as_tarball(
-    model, model_dir="models", model_name="linear_regression_model"
-):
-    """Save the trained model as a tar.gz file."""
+def save_model(model, model_dir="models", model_name="linear_regression_model"):
+    """Save the trained model as a joblib file."""
     # Save model using joblib
     model_path = f"{model_dir}/{model_name}.pkl"
     joblib.dump(model, model_path)
 
-    # Create tar.gz file
-    tarball_path = f"{model_dir}/{model_name}.tar.gz"
-    with tarfile.open(tarball_path, "w:gz") as tar:
-        tar.add(model_path, arcname=f"{model_name}.pkl")
+    # # Create tar.gz file
+    # tarball_path = f"{model_dir}/{model_name}.tar.gz"
+    # with tarfile.open(tarball_path, "w:gz") as tar:
+    #     tar.add(model_path, arcname=f"{model_name}.pkl")
 
-    # Clean up individual file
-    Path(model_path).unlink()
+    # # Clean up individual file
+    # Path(model_path).unlink()
 
-    return tarball_path
+    return model_path
 
 
 if __name__ == "__main__":
@@ -45,4 +43,4 @@ if __name__ == "__main__":
         "data/featurized/targets_train.csv", index_col="prod_id"
     )
     model = train_model(features_train, targets_train)
-    save_model_as_tarball(model)
+    save_model(model)

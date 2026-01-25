@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  preprocessing:
+    cmd: poetry run python src/preprocessing.py
+    deps:
+    - path: data/raw/lego_sets.csv
+      hash: md5
+      md5: 1e4a4d5eeef278924200ef0c4e62f42c
+      size: 18675351
+    - path: src/preprocessing.py
+      hash: md5
+      md5: 7fa04bec0e23fd5d26c73ee10982a497
+      size: 2177
+    outs:
+    - path: data/processed/preprocessed_lego_sets.csv
+      hash: md5
+      md5: 93312a5508ba9867c0cd5c5c3c7d5ecf
+      size: 505348
+  featurizing:
+    cmd: poetry run python src/featurize.py
+    deps:
+    - path: data/processed/preprocessed_lego_sets.csv
+      hash: md5
+      md5: 93312a5508ba9867c0cd5c5c3c7d5ecf
+      size: 505348
+    - path: src/featurize.py
+      hash: md5
+      md5: fa124b8acf531f7d91aec18f86951537
+      size: 3506
+    params:
+      params.yaml:
+        featurize.random_state: 42
+        featurize.split_ratio: 0.25
+    outs:
+    - path: data/featurized/features_test.csv
+      hash: md5
+      md5: af36e66f6c086c4f1c181add6a532fe8
+      size: 19880519
+    - path: data/featurized/features_train.csv
+      hash: md5
+      md5: 45f2fa6ba1a1b601d3758f0a12aaaded
+      size: 58781395
+    - path: data/featurized/targets_test.csv
+      hash: md5
+      md5: 50b34e4680b35752cf6876b05f9aa18f
+      size: 1260767
+    - path: data/featurized/targets_train.csv
+      hash: md5
+      md5: 9ca7ceb09a9785d88c2cd7abe8f31416
+      size: 3732306

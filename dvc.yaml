@@ -1,0 +1,38 @@
+stages:
+  preprocessing:
+    cmd: poetry run python src/preprocessing.py
+    deps:
+    - data/raw/lego_sets.csv
+    - src/preprocessing.py
+    outs:
+    - data/processed/preprocessed_lego_sets.csv
+  featurizing:
+    cmd: poetry run python src/featurize.py
+    params:
+    - featurize.split_ratio
+    - featurize.random_state
+    deps:
+    - data/processed/preprocessed_lego_sets.csv
+    - src/featurize.py
+    outs:
+    - data/featurized/features_train.csv
+    - data/featurized/features_test.csv
+    - data/featurized/targets_train.csv
+    - data/featurized/targets_test.csv
+  train:
+    cmd: poetry run python src/train.py
+    deps:
+    - data/featurized/features_train.csv
+    - data/featurized/targets_train.csv
+    - src/train.py
+    outs:
+    - models/linear_regression_model.pkl
+  evaluate:
+    cmd: poetry run python src/evaluate.py
+    deps:
+    - data/featurized/features_test.csv
+    - data/featurized/targets_test.csv
+    - models/linear_regression_model.pkl
+    - src/evaluate.py
+    outs:
+    - data/evaluation/test_features_with_predictions_and_targets.csv

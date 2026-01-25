@@ -3,6 +3,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
+import dvc.api
 
 
 def featurize(data: pd.DataFrame, target_column: str) -> (pd.DataFrame, pd.DataFrame):
@@ -69,11 +70,14 @@ def main(
         tuple: (features_train, features_test, targets_train, targets_test)
                All DataFrames with preserved indices from original data
     """
+    params = dvc.api.params_show(stages="featurizing")
     features, targets = featurize(processed_data, target_column)
 
     # Split while preserving indices
     train_indices, test_indices = train_test_split(
-        features.index, test_size=0.25, random_state=42
+        features.index,
+        test_size=params.get("featurize", "")["split_ratio"],
+        random_state=params.get("featurize", "")["random_state"],
     )
 
     features_train = features.loc[train_indices]
