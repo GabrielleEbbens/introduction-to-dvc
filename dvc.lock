@@ -48,3 +48,47 @@ stages:
       hash: md5
       md5: 9ca7ceb09a9785d88c2cd7abe8f31416
       size: 3732306
+  evaluate:
+    cmd: poetry run python src/evaluate.py
+    deps:
+    - path: data/featurized/features_test.csv
+      hash: md5
+      md5: af36e66f6c086c4f1c181add6a532fe8
+      size: 19880519
+    - path: data/featurized/targets_test.csv
+      hash: md5
+      md5: 50b34e4680b35752cf6876b05f9aa18f
+      size: 1260767
+    - path: models/linear_regression_model.pkl
+      hash: md5
+      md5: 92e525e8692bef97dc839f281a51249f
+      size: 2456
+    - path: src/evaluate.py
+      hash: md5
+      md5: 732fce3322fcb16f59362e90cea3cf52
+      size: 1945
+    outs:
+    - path: data/evaluation/test_features_with_predictions_and_targets.csv
+      hash: md5
+      md5: ea676b2c12b17d93d718a19859c91f58
+      size: 21866380
+  train:
+    cmd: poetry run python src/train.py
+    deps:
+    - path: data/featurized/features_train.csv
+      hash: md5
+      md5: 45f2fa6ba1a1b601d3758f0a12aaaded
+      size: 58781395
+    - path: data/featurized/targets_train.csv
+      hash: md5
+      md5: 9ca7ceb09a9785d88c2cd7abe8f31416
+      size: 3732306
+    - path: src/train.py
+      hash: md5
+      md5: 97bd2349b9587922dfa9d5fe734e22eb
+      size: 1268
+    outs:
+    - path: models/linear_regression_model.pkl
+      hash: md5
+      md5: 92e525e8692bef97dc839f281a51249f
+      size: 2456
