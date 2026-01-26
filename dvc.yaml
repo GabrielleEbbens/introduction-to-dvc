@@ -38,10 +38,7 @@ stages:
     outs:
     - data/evaluation
 metrics:
-- dvclive/metrics.json
 - data/evaluation/metrics.json
 plots:
-- dvclive/plots/metrics:
-    x: step
 - data/evaluation/plots/metrics:
     x: step
