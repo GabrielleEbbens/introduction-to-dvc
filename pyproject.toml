@@ -19,4 +19,5 @@ pandas = "^2.3.3"
 dvc = "^3.66.1"
 scikit-learn = "1.2.1"
 numpy = "^1.24.4"
+dvclive = "^3.49.0"
 

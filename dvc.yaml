@@ -28,12 +28,20 @@ stages:
     outs:
     - models/linear_regression_model.pkl
   evaluate:
-    cmd: poetry run python src/evaluate.py
+    cmd: poetry run python src/evaluate.py models/linear_regression_model.pkl 
+      data/featurized/features_test.csv data/featurized/targets_test.csv
     deps:
     - data/featurized/features_test.csv
     - data/featurized/targets_test.csv
     - models/linear_regression_model.pkl
     - src/evaluate.py
     outs:
-    - data/evaluation/test_features_with_predictions_and_targets.csv
-
+    - data/evaluation
+metrics:
+- dvclive/metrics.json
+- data/evaluation/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step
+- data/evaluation/plots/metrics:
+    x: step

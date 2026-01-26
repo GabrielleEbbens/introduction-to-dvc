@@ -49,7 +49,8 @@ stages:
       md5: 9ca7ceb09a9785d88c2cd7abe8f31416
       size: 3732306
   evaluate:
-    cmd: poetry run python src/evaluate.py
+    cmd: poetry run python src/evaluate.py models/linear_regression_model.pkl 
+      data/featurized/features_test.csv data/featurized/targets_test.csv
     deps:
     - path: data/featurized/features_test.csv
       hash: md5
@@ -65,13 +66,14 @@ stages:
       size: 2456
     - path: src/evaluate.py
       hash: md5
-      md5: 732fce3322fcb16f59362e90cea3cf52
-      size: 1945
+      md5: b9611a94f12356aa45321c0ab4500f8a
+      size: 2086
     outs:
-    - path: data/evaluation/test_features_with_predictions_and_targets.csv
+    - path: data/evaluation
       hash: md5
-      md5: ea676b2c12b17d93d718a19859c91f58
-      size: 21866380
+      md5: 0e44e0e7a01a6b97eb0382694a861637.dir
+      size: 21866684
+      nfiles: 7
   train:
     cmd: poetry run python src/train.py
     deps:
