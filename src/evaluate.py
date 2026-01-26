@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import joblib
-import tarfile
 from pathlib import Path
+from dvclive import Live
 
 
 def load_model(model_path):
@@ -42,6 +42,9 @@ def main(model_path, features_test, targets_test):
     """Evaluate the model and return metrics."""
     model = load_model(model_path)
     metrics, y_pred = evaluate_model(model, features_test, targets_test)
+    with Live("data/evaluation") as live:
+        for metric, value in metrics.items():
+            live.log_metric(metric, value)
     test_features_with_predictions_and_targets = features_test.copy()
     test_features_with_predictions_and_targets["target"] = targets_test.values
     test_features_with_predictions_and_targets["prediction"] = y_pred
