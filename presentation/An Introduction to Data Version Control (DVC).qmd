@@ -99,3 +99,82 @@ git checkout <commit sha>
 dvc checkout
 ```
 - This checks out the version of the dataset that was used in the specified commit.
+
+## These are great commands! But what if I want to keep track of data at different stages of the machine learning lifecycle?
+(insert gif or meme here)
+
+## DVC pipelines
+
+- The development of a machine learning model is often made of many stages (e.g. preprocessing, featurizing, training, evaluating).
+- You could just run these commands sequentially, but who has the time for that?
+- DVC allows set up these stages in a pipeline and keep track of the dependencies, the inputs and the outputs.
+- You can then run this pipeline with a single command.
+
+**Add a stage to the DVC pipeline**
+
+```bash
+dvc stage add -n preprocessing \
+  -d src/preprocessing.py -d data/raw/lego_sets.csv \
+  -o data/processed/preprocessed_lego_sets.csv \
+  poetry run python src/preprocessing.py
+```
+
+- If you are running this command for the first time, it will add a dvc yaml file and a dvc lock file.
+- Add any subsequent stages using `dvc stage add` or update the dvc.yaml file itself.
+
+## dvc.yaml and dvc.lock files
+
+- dvc.yaml: contains the pipeline definition
+- dvc.lock: contains the pipeline state
+(insert screenshot of dvc.yaml and dvc.lock here)
+
+## Updating stages and reproducing the pipeline
+
+- This is where dvc really shines.
+- If one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it.
+- Running `dvc repro` will run the pipeline, and only the stages that need to be run will be run,
+(screenshot of output)
+
+## DVC dag
+
+- Sometimes it is easier to visualize the pipeline rather than reading the dvc.yaml file.
+- DVC dag is a visualization of the pipeline.
+- It shows the dependencies between the stages.
+(screenshot of dvc dag)
+
+## Parameters
+
+- Parameters are values that can be changed to control the behavior of a stage.
+  - This is helpful for hyperparameter tuning, for example.
+- Parameters are specified in a params.yaml file (you will need to create this file).
+- The code example shows how to add a stage and specify parameters.
+(show screenshot of params file)
+
+```bash
+dvc stage add -n featurize \
+  -p featurize.split_ratio -p featurize.random_seed \
+  -d src/featurize.py -d data/processed/preprocessed_lego_sets.csv \
+  -o data/featurized/features_train.csv \
+  -o data/featurized/features_test.csv \
+  -o data/featurized/targets_train.csv \
+  -o data/featurized/targets_test.csv \
+  poetry run python src/featurize.py
+```
+
+## Experiment tracking with DVC
+
+- DVC allows you to track experiments and compare them.
+- You can run `dvc exp run` to run an experiment.
+- You can run `dvc exp list` to list all experiments.
+- You can run `dvc exp diff` or `dvc metrics diff`to compare experiments.
+(show screenshot of output)
+
+## Experiment comparison with VSCode extension
+
+- You can use the DVC extension for VSCode to compare experiments.
+(show screenshot of VSCode extension experiment comparison)
+
+## Queueing up experiments in DVC
+
+- You can queue up experiments in DVC and have them run successively.
+- This can be helpful for hyperparameter tuning.

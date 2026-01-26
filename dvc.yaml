@@ -21,19 +21,23 @@ stages:
     - data/featurized/targets_test.csv
   train:
     cmd: poetry run python src/train.py
+    params:
+    - train.random_state
+    - train.n_estimators
+    - train.max_depth
     deps:
     - data/featurized/features_train.csv
     - data/featurized/targets_train.csv
     - src/train.py
     outs:
-    - models/linear_regression_model.pkl
+    - models/random_forest_model.pkl
   evaluate:
-    cmd: poetry run python src/evaluate.py models/linear_regression_model.pkl 
+    cmd: poetry run python src/evaluate.py models/random_forest_model.pkl 
       data/featurized/features_test.csv data/featurized/targets_test.csv
     deps:
     - data/featurized/features_test.csv
     - data/featurized/targets_test.csv
-    - models/linear_regression_model.pkl
+    - models/random_forest_model.pkl
     - src/evaluate.py
     outs:
     - data/evaluation

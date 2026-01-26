@@ -52,7 +52,7 @@ def main(model_path, features_test, targets_test):
 
 
 if __name__ == "__main__":
-    model_path = "models/linear_regression_model.pkl"
+    model_path = "models/random_forest_model.pkl"
     features_test = pd.read_csv(
         "data/featurized/features_test.csv", index_col="prod_id"
     )

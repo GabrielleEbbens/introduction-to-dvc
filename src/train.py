@@ -1,15 +1,13 @@
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 import joblib
-import tarfile
-from pathlib import Path
+import dvc.api
 
 
 def train_model(features_train, targets_train):
-    """Train a linear regression model."""
-    model = LinearRegression()
+    """Train an sklearn model."""
+    model = RandomForestRegressor()
 
-    # Flatten targets to 1D array for sklearn
     y_train = targets_train.values.ravel()
 
     # Train the model
@@ -18,21 +16,24 @@ def train_model(features_train, targets_train):
     return model
 
 
-def save_model(model, model_dir="models", model_name="linear_regression_model"):
+def save_model(model, model_dir="models", model_name="random_forest_model"):
     """Save the trained model as a joblib file."""
     # Save model using joblib
     model_path = f"{model_dir}/{model_name}.pkl"
     joblib.dump(model, model_path)
-
-    # # Create tar.gz file
-    # tarball_path = f"{model_dir}/{model_name}.tar.gz"
-    # with tarfile.open(tarball_path, "w:gz") as tar:
-    #     tar.add(model_path, arcname=f"{model_name}.pkl")
-
-    # # Clean up individual file
-    # Path(model_path).unlink()
-
     return model_path
+
+
+def main(features_train, targets_train):
+    params = dvc.api.params_show()
+    model = RandomForestRegressor(
+        random_state=params.get("train", "")["random_state"],
+        n_estimators=params.get("train", "")["n_estimators"],
+        max_depth=params.get("train", "")["max_depth"],
+    )
+    model.fit(features_train, targets_train.values.ravel())
+    save_model(model)
+    return model
 
 
 if __name__ == "__main__":
