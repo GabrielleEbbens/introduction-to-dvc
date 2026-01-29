@@ -2,7 +2,10 @@
 title: "An Introduction to Data Version Control (DVC)"
 author: "Gabrielle Ebbens"
 date: "2026-02-12"
-format: revealjs
+format:
+  revealjs:
+    center-title-slide: true
+
 ---
 
 # How is version control used currently?
@@ -20,16 +23,20 @@ The most common method of version control is git, which consists of:
 - These files can be easily stored in a git repository. This is like keeping a photos in a photo album (put a picture here).
 - You might be thinking "We know how to keep track of code. But what about data and models?"
 
-# What makes version control difficult in data science?
+## What makes version control difficult in data science?
 
 - Data science models are affected by a combination of data AND code, making version history more complex.
 - There are infinite ways to change a dataset and models, meaning that there are A LOT of changes to keep track of.
 - Many small changes to data may mean that we have lots of files named slightly differently (e.g. data.csv, data_2.csv, data_final.csv, data_final_the_finalest_version_of_final.csv).
 - Data Scientists work with HUGE datasets, which are often too large to store in a git repository. It would be like trying to stick the yellow pages in a photo album.
 
-# Is there a better way to keep track of data and models?
 
-There is, Kevin! (Insert Joey gif here)
+## Is there a better way to keep track of data and models? {style="text-align: center;"}
+
+There is, Kevin!
+
+![](An Introduction to Data Version Control (DVC)_files/images/joey.gif){width=300}
+
 
 # Introducing DVC
 
@@ -133,7 +140,8 @@ dvc stage add -n preprocessing \
 - This is where dvc really shines.
 - If one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it.
 - Running `dvc repro` will run the pipeline, and only the stages that need to be run will be run,
-(screenshot of output)
+(screenshot of output).
+- Each run of a pipeline is cached (in .dvc/cache/runs), and is utilized by `dvc repro` and `dvc exp run` (more on this later).
 
 ## DVC dag
 
@@ -178,3 +186,48 @@ dvc stage add -n featurize \
 
 - You can queue up experiments in DVC and have them run successively.
 - This can be helpful for hyperparameter tuning.
+
+```bash
+dvc exp run --queue -S 'train.n_estimators=range(50, 100, 10)' -S 'train.max_depth=range(5, 10, 1)'
+```
+(screenshot of queued experiments)
+
+- You can run `dvc queue start` to kick off the experiments.
+
+## Output of experiment queue
+(screenshot of experiment queue output)
+
+## This is all well and good locally. But what about in the cloud?
+(insert gif or meme here)
+
+## Interaction with Cloud Services
+ 
+ You can integrate DVC to work with other ML Frameworks, including:
+ - Amazon SageMaker
+ - Databricks
+ - Evidently
+ - Huggingface
+
+ ## Running DVC from a remote git repository
+
+ - DVC can be run in remote git environments (e.g. GitHub Actions or Bitbucket Pipelines).
+ - You can setup access to your remote dvc repository in the dvc config file and run dvc commands as you would locally.
+ - You can use this mechanism to automate your machine learning pipeline.
+ (show screenshot of a GitHub Actions workflow or Bitbucket Pipeline)
+
+ ## Conclusion
+
+ - DVC allows you to keep track of data and models in a git-like method.
+ - It is used in conjunction with git to keep track of data and models.
+ - It allows you to orchestrate your machine learning pipeline and keep track of the dependencies, inputs, and outputs.
+ - DVC's run cache allows you to avoid running stages that have not changed, improving speed and performance.
+ - DVC can be used locally or in the cloud.
+ - It is a powerful tool for anyone working with data and models.
+
+ ## Any questions?
+
+ ## Thanks for listening! 
+
+
+
+
