@@ -62,8 +62,8 @@ stages:
       size: 1260767
     - path: models/random_forest_model.pkl
       hash: md5
-      md5: 06959f3c27f1107df07dcddeac887df4
-      size: 93164433
+      md5: b98235ae1fb8ca6b6e0603348f97331c
+      size: 93274385
     - path: src/evaluate.py
       hash: md5
       md5: a8841a8d8dd6fcef75a560b9fa01bb98
@@ -71,8 +71,8 @@ stages:
     outs:
     - path: data/evaluation
       hash: md5
-      md5: 2cf9cfd3b93c7e7d72a86ecd524b18e0.dir
-      size: 21834661
+      md5: 16bdaf22d270a927cb24c1830b6710d3.dir
+      size: 21837246
       nfiles: 7
   train:
     cmd: poetry run python src/train.py
@@ -92,10 +92,10 @@ stages:
     params:
       params.yaml:
         train.max_depth: 10
-        train.n_estimators: 100
+        train.n_estimators: 50
         train.random_state: 42
     outs:
     - path: models/random_forest_model.pkl
       hash: md5
-      md5: 06959f3c27f1107df07dcddeac887df4
-      size: 93164433
+      md5: b98235ae1fb8ca6b6e0603348f97331c
+      size: 93274385
