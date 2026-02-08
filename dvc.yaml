@@ -43,6 +43,8 @@ stages:
     - data/evaluation
 metrics:
 - data/evaluation/metrics.json
+- data/evaluation/plots/images/feature_importance.png/metrics.json
 plots:
 - data/evaluation/plots/metrics:
     x: step
+- data/evaluation/plots/images/feature_importance.png/plots/images

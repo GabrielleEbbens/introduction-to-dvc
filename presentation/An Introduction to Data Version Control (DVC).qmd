@@ -37,7 +37,7 @@ We all know what git is? This is the most common method of version control, wher
 - Lots of files => lots of changes(e.g. data_final.csv, final_data_2.csv,final_data_this_time_its_final.csv)
 - HUGE DATASETS are too large to store in a git repository
 
-![](An Introduction to Data Version Control (DVC)_files/images/yellow pages.png)
+![](An Introduction to Data Version Control (DVC)_files/images/yellow pages.png){width=90%, fig-align="center"}
 
 ::: {.notes}
 Models can be affected by a combination of data AND code, making version history more complex. There are infinite ways to change a dataset and models, meaning that there are A LOT of changes to keep track of. Many small changes to data may mean that we have lots of files named slightly differently (e.g. data.csv, data_2.csv, data_final.csv, data_final_the_finalest_version_of_final.csv). Data Scientists work with HUGE datasets, which are often too large to store in a git repository. It would be like trying to stick the yellow pages in a photo album.
@@ -47,7 +47,7 @@ Models can be affected by a combination of data AND code, making version history
 
 There is, Kevin!
 
-![](An Introduction to Data Version Control (DVC)_files/images/joey.gif){width=300}
+![](An Introduction to Data Version Control (DVC)_files/images/and-there-is-kevin-GIF.gif){width=90%, fig-align="center"}
 
 
 # Introducing DVC
@@ -79,7 +79,7 @@ flowchart LR
     C --> |dvc remote add| D(Link to remote storage)
 ```
 
-![](An Introduction to Data Version Control (DVC)_files/images/dvc push and pull.png){width=90%}
+![](An Introduction to Data Version Control (DVC)_files/images/dvc push and pull.png){width=90%, fig-align="center"}
 
 ::: {.notes}
 How can we use dvc? A typical dvc setup workflow would look like this: first, we would initialise a dvc repository using `dvc init`, then we would add our data using `dvc add`, then we would link to our remote storage - which could be S3, Google Drive, Azure Blob Storage, or even locally - using `dvc remote add`. We would then push our data to the remote storage using `dvc push`, and pull our data from the remote storage using `dvc pull`, as we would do with git.
@@ -107,7 +107,7 @@ How can we use dvc? A typical dvc setup workflow would look like this: first, we
 
 ## That's great! But can we keep track of data at different stages of the machine learning lifecycle?
 
-![](An Introduction to Data Version Control (DVC)_files/images/Schitts Creek Comedy GIF by CBC.gif)
+![](An Introduction to Data Version Control (DVC)_files/images/Schitts Creek Comedy GIF by CBC.gif){width=90%, fig-align="center"}
 
 ## Yes you can with... DVC pipelines!
 
@@ -119,7 +119,7 @@ flowchart LR
     D --> |dvc stage add| E(Set up a dvc pipeline or DAG)
 ```
 
-![](An Introduction to Data Version Control (DVC)_files/images/Happy Parks And Rec GIF.gif)
+![](An Introduction to Data Version Control (DVC)_files/images/Happy Parks And Rec GIF.gif){width=90%, fig-align="center"}
 
 ## DVC pipelines
 
@@ -182,15 +182,16 @@ dvc stage add -n preprocessing \
 
 :::: {.columns}
 
-::: {.column witdth="50%"}
+::: {.column width="50%"}
 
-![](An Introduction to Data Version Control (DVC)_files/images/dvc dag.png){width=90%}
+![](An Introduction to Data Version Control (DVC)_files/images/dvc dag.png){width=70%}
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="50%" text-align="center"}
 
 - `dvc dag` shows a vizualization of the pipeline.
+- It shows the individual stages of the pipeline and the dependancies between them.
 
 :::
 
@@ -198,23 +199,38 @@ dvc stage add -n preprocessing \
 
 ## Parameters
 
-- Parameters are values that can be changed to control the behavior of a stage in the pipeline.
+- Parameters can be used to change the behaviour of a stage in the pipeline.
+- Parameters are specified in params.yaml file.
+- Parameters can be added to the pipeline using the `-p` flag.
 
-```bash
-dvc stage add -n featurize \
-  -p featurize.split_ratio -p featurize.random_seed \
-  -d src/featurize.py -d data/processed/preprocessed_lego_sets.csv \
-  -o data/featurized/features_train.csv \
-  -o data/featurized/features_test.csv \
-  -o data/featurized/targets_train.csv \
-  -o data/featurized/targets_test.csv \
-  poetry run python src/featurize.py
-```
+::::{.columns}
+
+:::{.column width=50%}
+
 ![](An Introduction to Data Version Control (DVC)_files/images/params.png){width=90%}
+
+:::
+
+:::{.column width=50%}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc yaml params.png){width=90%}
+
+:::
+
+::::
 
 ## Experiment tracking with DVC
 
 - You can specify metrics to track in the dvc.yaml file.
+- You can then use the dvc python API to log metrics.
+
+```python
+with Live("data/evaluation") as live:
+    for metric, value in metrics.items():
+        live.log_metric(metric, value)
+```
+
+## Running and comparing experiments
 
 ![](An Introduction to Data Version Control (DVC)_files/images/exp run.png){width=90%}
 
@@ -225,6 +241,13 @@ dvc stage add -n featurize \
 - DVC has a VSCode extension to visualize experiments and their results.
 
 ![](An Introduction to Data Version Control (DVC)_files/images/vs code.png){width=90%}
+
+## Plots
+
+- You can also track plots in DVC.
+- Plots are specified in the dvc.yaml file.
+
+![](An Introduction to Data Version Control (DVC)_files/images/plots.png){width=90%}
 
 ## Queueing up experiments in DVC
 
@@ -239,7 +262,8 @@ dvc exp run --queue -S 'train.n_estimators=range(50, 100, 10)' -S 'train.max_dep
 - You can run `dvc queue start` to kick off the experiments.
 
 ## This is all well and good locally. But what about in the cloud?
-(insert gif or meme here)
+
+![](An Introduction to Data Version Control (DVC)_files/images/Technology Cloud GIF by puraenvidia.gif){width=90%}
 
 ## Interaction with Cloud Services
  
@@ -269,7 +293,14 @@ dvc exp run --queue -S 'train.n_estimators=range(50, 100, 10)' -S 'train.max_dep
 
 ![](An Introduction to Data Version Control (DVC)_files/images/Feelings Thoughts GIF by chuber channel.gif){width=90%}
 
-## Social Links
+## Links
+
+**DVC**
+
+- docs: https://doc.dvc.org/
+- getting started: https://github.com/treeverse/example-get-started
+
+**Socials**
 
 - GitHub: https://github.com/GabrielleEbbens
 - LinkedIn: https://www.linkedin.com/in/gabrielle-ebbens/
