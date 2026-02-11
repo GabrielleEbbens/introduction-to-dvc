@@ -4,6 +4,7 @@ author: "Gabrielle Ebbens"
 date: "2026-02-12"
 format:
   revealjs:
+    continuum-theme-revealjs: default
     center-title-slide: true
     preload-iframes: true
 
@@ -232,13 +233,17 @@ flowchart LR
 
 ::: {.column width="50%"}
 
-![](An Introduction to Data Version Control (DVC)_files/images/dvc file contents.png)
+![](An Introduction to Data Version Control (DVC)_files/images/dvc file contents.png){width=70%}
 :::
 
 ::::
 
+::: {.smaller}
+
 - DVC uses a .dvc file to store the metadata of the data. This is tracked in git.
-- The .dvc file contains the path to the data, the hash of the data, and the hash of the code that was used to generate the data.
+- The .dvc file contains the path to the data, the hash of the data, and the hashing algorithm that was used to generate the hash.
+
+:::
 
 ::: {.notes}
 
@@ -286,6 +291,8 @@ flowchart LR
 ## DVC pipelines
 
 - With dvc, you can keep track of data and models at different stages of the machine learning lifecycle.
+- By setting dependencies, you have essentially performed a `dvc add` action.
+- The data that is set as a dependency is now tracked in the dvc pipeline.
 
 ```bash
 dvc stage add -n preprocessing \
@@ -336,6 +343,7 @@ This is the file that contains the information of the pipeline. It has the names
 
 - The dvc.lock file contains the metadata of the pipeline.
 - This is tracked in git along with the dvc.yaml file.
+- This is what dvc uses to know which version of the data and code to use at each stage of the pipeline.
 
 :::
 
@@ -367,18 +375,36 @@ Running dvc repro will run the pipeline. If you are running it for the first tim
 - Run `dvc repro` to run the pipeline.
 - If one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it.
 
+![](An Introduction to Data Version Control (DVC)_files/images/dvc repro.png){width=90%}
+
 ::: {.notes}
 
 Running dvc repro will run the pipeline. If you are running it for the first time, all stages will be run. Subsequently, if one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it. This because each run of the pipeline is cached, and dvc can see which steps have been run already. This dramatically speeds up the development cycle of your model.
 :::
 
-## Updating stages and reproducing the pipeline {auto-animate="true"}
+## A change in hash means a bust in cache {auto-animate="true"}
 
-- Run `dvc repro` to run the pipeline.
-- If one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it.
-- This because each run of the pipeline is cached.
+## A change in hash means a bust in cache {auto-animate="true"}
 
-![](An Introduction to Data Version Control (DVC)_files/images/dvc repro.png){width=90%}
+- DVC has a run cache, where each of the runs of the pipeline is stored.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a run cache, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the dvc.lock file.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a run cache, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the dvc.lock file.
+- If the hash has changed, dvc will run the stage again.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a run cache, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the dvc.lock file.
+- If the hash has changed, dvc will run the stage again.
+- This is true if the code that the stage depends on has changed as well.
 
 ::: {.notes}
 
@@ -436,6 +462,8 @@ You can use parameters to change the behaviour of a stage in the pipeline. Param
 - You can specify metrics to track in the dvc.yaml file.
 - You can then use the dvc python API to log metrics.
 
+![](An Introduction to Data Version Control (DVC)_files/images/metrics yaml.png){width=90%}
+
 ```python
 from dvclive import Live
 
@@ -482,20 +510,19 @@ dvc exp run --queue -S 'train.n_estimators=range(50, 100, 10)' -S 'train.max_dep
 
 ![](An Introduction to Data Version Control (DVC)_files/images/Technology Cloud GIF by puraenvidia.gif){width=90%}
 
-## Interaction with Cloud Services
- 
- - You can integrate DVC to work with other ML Frameworks, including:
-  - Amazon SageMaker
-  - Databricks
-  - Evidently
-  - Huggingface
 
+## DVC produces generic files
+ - DVC does not produce file types that are specific to a framework. They are generic file types such as yaml, csv, pkl, etc.
+ - This means that your dvc code can be wrapped and used with other ML frameworks, including:
+    - Amazon Sagemaker
+    - Databricks
+    - Huggingface
+    - Evidently
 
-## Running DVC from a remote git repository
+## An example of using DVC in the cloud
 
- - DVC can be run in remote git environments (e.g. GitHub Actions or Bitbucket Pipelines).
- - You can setup access to your remote dvc repository in the dvc config file and run dvc commands as you would locally.
- - You can use this mechanism to automate your machine learning pipeline.
+![](An Introduction to Data Version Control (DVC)_files/images/sagemaker workflow.png){width=90%}
+
 
 ## Summary {auto-animate="true"}
 
