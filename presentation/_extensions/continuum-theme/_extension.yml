@@ -1,0 +1,17 @@
+title: Continuum Theme
+author: Continuum Media
+version: 0.2.0
+quarto-required: ">=1.2.0"
+contributes:
+  formats:
+    revealjs:
+      theme: continuum-revealjs.scss
+      slide-number: true
+      transition: fade
+      background-transition: fade
+      logo: "_extensions/continuum-theme/Logos/PNG/ContinuumLogo_C_Green.png"
+    html:
+      theme: continuum-html.scss
+      toc: true
+      code-fold: true
+      logo: "_extensions/continuum-theme/Logos/PNG/ContinuumLogo_C_Green.png"

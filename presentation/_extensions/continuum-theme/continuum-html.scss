@@ -1,0 +1,205 @@
+/*-- scss:defaults --*/
+
+// Official Continuum Brand Colors
+$continuum-green: #4c8f98; // Primary brand color
+$continuum-charcoal: #383838; // Dark background
+$continuum-gray: #ebebeb; // Light text/foreground
+$abbey-gray: #58595b; // Medium gray
+$stone-gray: #808285; // Light gray
+$silver-gray: #bcbec0; // Lighter gray
+$iron-gray: #d1d3d4; // Very light gray
+$glacier-blue: #72b9be; // Light blue accent
+$mineral-green: #435f63; // Dark green accent
+$continuum-yellow: #e6bf20; // Yellow accent
+$saffron-yellow: #e8af2b; // Orange-yellow accent
+$white: #ffffff; // Pure white
+
+// HTML format variables
+$body-bg: white;
+$body-color: $continuum-charcoal;
+$link-color: $continuum-green;
+$code-bg: #f8f9fa;
+$code-color: $continuum-charcoal;
+
+/*-- scss:rules --*/
+
+body {
+  font-family: 'Gotham', 'Gotham Book', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: $continuum-charcoal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Gotham', 'Gotham Bold', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: $continuum-charcoal;
+  position: relative;
+  padding-bottom: 0.2em;
+  display: inline-block;
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+.content h1::after, 
+.content h2::after, 
+.content h3::after, 
+.content h4::after, 
+.content h5::after, 
+.content h6::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 6px;
+  background-color: $continuum-green;
+  border-radius: 999px;
+}
+
+/* Remove underlines from TOC headings */
+#toc h1::after,
+#toc h2::after,
+#toc h3::after,
+#toc h4::after,
+#toc h5::after,
+#toc h6::after,
+.sidebar h1::after,
+.sidebar h2::after,
+.sidebar h3::after,
+.sidebar h4::after,
+.sidebar h5::after,
+.sidebar h6::after {
+  display: none;
+}
+
+.content h1::after {
+  height: 8px;
+  width: 140px;
+}
+
+h1 {
+  color: $continuum-green;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+a {
+  color: $continuum-green;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darken($continuum-green, 15%);
+  text-decoration: underline;
+}
+
+strong, b {
+  font-weight: 600;
+  color: $continuum-yellow;
+  background-color: rgba($continuum-yellow, 0.15);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+em, i {
+  font-style: italic;
+  color: $continuum-yellow;
+  font-weight: 500;
+}
+
+blockquote {
+  border-left: 4px solid $continuum-green;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  background-color: rgba($continuum-green, 0.05);
+  padding: 1rem;
+  border-radius: 0 4px 4px 0;
+}
+
+code {
+  background-color: $code-bg;
+  color: $code-color;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+pre {
+  background-color: $code-bg;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+table th {
+  background-color: $continuum-green;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+ul, ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+li {
+  margin: 0.5rem 0;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: $continuum-green;
+  margin: 2rem 0;
+  border-radius: 1px;
+}
+
+.callout {
+  border-left: 4px solid $glacier-blue;
+  background-color: rgba($glacier-blue, 0.1);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.callout-title {
+  font-weight: 600;
+  color: $glacier-blue;
+  margin-bottom: 0.5rem;
+}
