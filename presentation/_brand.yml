@@ -1,0 +1,24 @@
+color:
+  palette:
+    continuum-green: "#4c8f98"
+    continuum-charcoal: "#383838"
+    continuum-gray: "#ebebeb"
+    glacier-blue: "#72b9be"
+    continuum-yellow: "#e6bf20"
+  
+  # Semantic color mappings
+  background: continuum-charcoal
+  foreground: continuum-gray
+  primary: continuum-green
+  secondary: continuum-yellow
+  tertiary: glacier-blue
+
+logo:
+  medium: "_extensions/continuum-theme/Logos/PNG/ContinuumLogo_C_Green.png"
+
+typography:
+  fonts:
+    - family: Gotham
+      source: system
+  base: Gotham
+  headings: Gotham

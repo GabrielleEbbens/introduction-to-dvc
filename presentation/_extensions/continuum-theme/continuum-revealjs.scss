@@ -1,0 +1,385 @@
+/*-- scss:defaults --*/
+
+// Official Continuum Brand Colors
+$continuum-green: #4c8f98; // Primary brand color
+$continuum-charcoal: #383838; // Dark background
+$continuum-gray: #ebebeb; // Light text/foreground
+$abbey-gray: #58595b; // Medium gray
+$stone-gray: #808285; // Light gray
+$silver-gray: #bcbec0; // Lighter gray
+$iron-gray: #d1d3d4; // Very light gray
+$glacier-blue: #72b9be; // Light blue accent
+$mineral-green: #435f63; // Dark green accent
+$continuum-yellow: #e6bf20; // Yellow accent
+$saffron-yellow: #e8af2b; // Orange-yellow accent
+$white: #ffffff; // Pure white
+
+// Legacy colors kept for future reference
+$color-purple: #b16286; // Keep for future use
+$color-red: #cc241d; // Keep for future use
+
+// Theme variable mappings for Reveal.js
+$color-blue: $continuum-green; // Use green as primary accent (was blue)
+$color-fg0: $continuum-gray; // Light text
+$color-bg1: $stone-gray; // Light background
+$color-bg2: $abbey-gray; // Medium background  
+$color-bg3: $continuum-charcoal; // Dark background
+$color-aqua: $glacier-blue; // Secondary accent
+$color-green: $mineral-green; // Dark green
+$color-orange: $saffron-yellow; // Orange accent
+$color-yellow: $continuum-yellow; // Yellow accent
+
+$backgroundColor: $color-bg3;
+$mainColor: $color-fg0;
+$headingColor: $color-fg0;
+$linkColor: $color-aqua;
+$linkColorHover: lighten($color-aqua, 15%);
+$selectionBackgroundColor: $color-aqua;
+
+$mainFontSize: 32px;
+$mainFont: 'Gotham', 'Gotham Book', Helvetica, Arial, sans-serif;
+$headingFont: 'Gotham', 'Gotham Bold', Helvetica, Arial, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingFontWeight: 600;
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+$blockMargin: 20px;
+$headingMargin: 0 0 $blockMargin 0;
+
+/*-- scss:rules --*/
+
+.reveal .columns {
+  display: flex;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.reveal .column {
+  flex: 1;
+}
+
+.reveal {
+  font-weight: 300;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-weight: $headingFontWeight;
+  position: relative;
+  padding-bottom: 0.2em;
+  display: inline-block;
+}
+
+.reveal h1::after,
+.reveal h2::after,
+.reveal h3::after,
+.reveal h4::after,
+.reveal h5::after,
+.reveal h6::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 6px;
+  background-color: $color-blue;
+  border-radius: 999px;
+}
+
+.reveal h1::after {
+  height: 8px;
+  width: 140px;
+}
+
+.reveal a {
+  color: $linkColor;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+
+.reveal a:hover {
+  color: $linkColorHover;
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: $linkColor;
+}
+
+.reveal .controls {
+  color: $linkColor;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: $blockMargin auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  text-transform: none;
+  tab-size: 2;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+}
+
+.reveal .code-wrapper {
+  white-space: normal;
+}
+
+.reveal .code-wrapper code {
+  white-space: pre;
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table th[align="center"],
+.reveal table td[align="center"] {
+  text-align: center;
+}
+
+.reveal table th[align="right"],
+.reveal table td[align="right"] {
+  text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.reveal sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal small * {
+  vertical-align: top;
+}
+
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em;
+}
+
+.reveal ol {
+  list-style-type: decimal;
+}
+
+.reveal ul {
+  list-style-type: disc;
+}
+
+.reveal ul ul {
+  list-style-type: square;
+}
+
+.reveal ul ul ul {
+  list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  display: block;
+  margin-left: 40px;
+}
+
+.reveal dt {
+  font-weight: bold;
+}
+
+.reveal dd {
+  margin-left: 40px;
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: $blockMargin auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba($color-aqua, 0.05);
+  box-shadow: 0px 0px 2px rgba($color-aqua, 0.2);
+  border-left: 4px solid $color-blue;
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: $blockMargin auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal table th {
+  background: $color-bg3;
+  border-bottom: 2px solid $color-aqua;
+  font-weight: 600;
+}
+
+.reveal table td {
+  border-bottom: 1px solid $color-bg2;
+}
+
+.reveal table th,
+.reveal table td {
+  padding: 0.5em 1em;
+}
+
+.reveal .slide-number {
+  color: $color-aqua;
+  background-color: transparent;
+}
+
+.reveal .progress {
+  background: rgba($color-bg2, 0.2);
+  color: $color-aqua;
+}
+
+.reveal .controls {
+  color: $color-aqua;
+}
+
+.reveal .slide-background {
+  background-color: $backgroundColor;
+}
+
+.reveal section[data-background-color] {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    border-bottom-color: currentColor;
+  }
+}
+
+/* Cover Slide Styling */
+.reveal .cover-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  background: $continuum-charcoal !important;
+  position: relative;
+}
+
+.reveal .cover-slide h1 {
+  margin-top: 0;
+  font-size: 2.5em;
+  color: $continuum-gray;
+}
+
+.reveal .cover-slide h1::after {
+  background-color: $continuum-green;
+}
+
+/* Yellow Text Emphasis */
+.reveal strong,
+.reveal b {
+  font-weight: 600;
+  color: $continuum-yellow;
+  background-color: rgba($continuum-yellow, 0.15);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+.reveal em {
+  font-style: italic;
+  color: $continuum-yellow;
+  font-weight: 500;
+}
+
+

@@ -2,122 +2,283 @@
 title: "An Introduction to Data Version Control (DVC)"
 author: "Gabrielle Ebbens"
 date: "2026-02-12"
-format:
-  revealjs:
-    center-title-slide: true
+format: 
+    continuum-theme-revealjs: default
+    
 
 ---
 
-# How is version control used currently?
+## How is version control used currently? {style="text-align: center;"}
 
-The most common method of version control is git, which consists of:
+::: {.smaller}
+- File changes are tracked in remote git repositories
+- Commits are snapshots of the project files at a given point in time
+- Code files are easily stored in git repositories, like storing photos in a photo album
+:::
+ 
+:::: {.columns}
+ 
+::: {.column width="50%"}
+![](An Introduction to Data Version Control (DVC)_files/images/Git Diagram.png){width=90%}
+:::
+ 
+::: {.column width="50%"}
+![](An Introduction to Data Version Control (DVC)_files/images/photos into album.png){width=90%}
+:::
+ 
+::::
 
-- A repository (repo) containing the project files and history
-- Commits - snapshots of the project files at a given point in time
-- Branches - a parallel line of development where you can work on features and not affect the main codebase.
-- A remote repository (e.g. GitHub, GitLab, Bitbucket) for collaboration
+::: {.notes}
+We all know what git is? This is the most common method of version control, where changes to files are tracked in a remote git repository in the form of commits (snapshots of the project files at a given point in time). Files are easily stored in git repositories, like storing photos in a photo album.
+:::
 
-#
+## What makes version control difficult in data science? {auto-animate="true"}
 
-- In software development, version control is used to keep track of changes to code files. 
-- These files can be easily stored in a git repository. This is like keeping a photos in a photo album (put a picture here).
-- You might be thinking "We know how to keep track of code. But what about data and models?"
+::: {.notes}
 
-## What makes version control difficult in data science?
+So what makes version control difficult in data science? We not only have code, but also data and models to keep track of. Models will change depending on data and code so this is a lot of changes to keep track of. If you're keeping track of the files manually, you may name them all differently depending on the changes you make (give some examples). These days, data scientists work with huge datasets that are too large to store in a git repository. It would be like trying to shove the yellow pages into a photo album. 
 
-- Data science models are affected by a combination of data AND code, making version history more complex.
-- There are infinite ways to change a dataset and models, meaning that there are A LOT of changes to keep track of.
-- Many small changes to data may mean that we have lots of files named slightly differently (e.g. data.csv, data_2.csv, data_final.csv, data_final_the_finalest_version_of_final.csv).
-- Data Scientists work with HUGE datasets, which are often too large to store in a git repository. It would be like trying to stick the yellow pages in a photo album.
+:::
+
+## What makes version control difficult in data science? {auto-animate="true"}
+
+- **Models = data + code** => infinite ways to change a model
+
+::: {.notes}
+
+So what makes version control difficult in data science? We not only have code, but also data and models to keep track of. Models will change depending on data and code so this is a lot of changes to keep track of. If you're keeping track of the files manually, you may name them all differently depending on the changes you make (give some examples). These days, data scientists work with huge datasets that are too large to store in a git repository. It would be like trying to shove the yellow pages into a photo album. 
+
+:::
+
+## What makes version control difficult in data science? {auto-animate="true"}
+
+- **Models = data + code** => infinite ways to change a model
+
+- **Lots of files** => lots of changes(e.g. data_final.csv, final_data_2.csv, final_data_this_time_its_final.csv)
+
+::: {.notes}
+
+So what makes version control difficult in data science? We not only have code, but also data and models to keep track of. Models will change depending on data and code so this is a lot of changes to keep track of. If you're keeping track of the files manually, you may name them all differently depending on the changes you make (give some examples). These days, data scientists work with huge datasets that are too large to store in a git repository. It would be like trying to shove the yellow pages into a photo album. 
+
+:::
+
+## What makes version control difficult in data science? {auto-animate="true"}
+
+- **Models = data + code** => infinite ways to change a model
+
+- **Lots of files** => lots of changes(e.g. data_final.csv, final_data_2.csv, final_data_this_time_its_final.csv)
+
+- **HUGE DATASETS** are too large to store in a git repository
+
+::: {.notes}
+
+So what makes version control difficult in data science? We not only have code, but also data and models to keep track of. Models will change depending on data and code so this is a lot of changes to keep track of. If you're keeping track of the files manually, you may name them all differently depending on the changes you make (give some examples). These days, data scientists work with huge datasets that are too large to store in a git repository. It would be like trying to shove the yellow pages into a photo album. 
+
+:::
+
+## What makes version control difficult in data science? {auto-animate="true"}
+
+- **Models = data + code** => infinite ways to change a model
+
+- **Lots of files** => lots of changes(e.g. data_final.csv, final_data_2.csv, final_data_this_time_its_final.csv)
+
+- **HUGE DATASETS** are too large to store in a git repository
+
+![](An Introduction to Data Version Control (DVC)_files/images/yellow pages.png){width="90%" fig-align="center"}
+
+::: {.notes}
+
+So what makes version control difficult in data science? We not only have code, but also data and models to keep track of. Models will change depending on data and code so this is a lot of changes to keep track of. If you're keeping track of the files manually, you may name them all differently depending on the changes you make (give some examples). These days, data scientists work with huge datasets that are too large to store in a git repository. It would be like trying to shove the yellow pages into a photo album. 
+
+:::
 
 
-## Is there a better way to keep track of data and models? {style="text-align: center;"}
+## Is there a better way to keep track of data and models? {style="text-align: center;" auto-animate="true"}
 
-There is, Kevin!
+## Is there a better way to keep track of data and models? {style="text-align: center;" auto-animate="true"}
 
-![](An Introduction to Data Version Control (DVC)_files/images/joey.gif){width=300}
+**There is, Kevin!**
+
+## Is there a better way to keep track of data and models? {style="text-align: center;" auto-animate="true"}
+
+**There is, Kevin!**
+
+![](An Introduction to Data Version Control (DVC)_files/images/and-there-is-kevin-GIF.gif?v=1)
+
+# Introducing DVC {auto-animate="true"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc.jpeg){fig-align="center"}
 
 
-# Introducing DVC
+# Introducing DVC {auto-animate="true"}
 
-Data Version Control (DVC) is:
+:::: {.columns}
 
-- An open-source tool owned by LakeFS that allows git-like versioning of data, models and pipelines.
-- It tracks the metadata of the data and models, while the actual data and models are stored in a remote storage (e.g. S3, Google Drive, Azure Blob Storage, locally).
-    - Instead of storing the yellow pages in a photo album, we can store information of the yellow pages in a photo album while storing the actual yellow pages in the cloud.
-- It works together with git: git tracks the metadata of the data and models, while DVC tracks the actual data and models.
+::: {.column width="20%"}
 
-# How does DVC keep track of data and models?
+![](An Introduction to Data Version Control (DVC)_files/images/dvc.jpeg)
+:::
 
-To see how it works, we'll set up a basic DVC project. This demo will cover:
+::: {.column width="80%"}
 
-- Initialize a DVC project
-- Add a dataset to the DVC project
-- Configure DVC to use a remote storage
-- Commands such as `dvc push`, `dvc pull`, `dvc checkout`
-- How to set up dvc pipelines
+- Open-source tool with a command-line interface and python API.
 
-## Project setup and adding data
+:::
 
-**Initialize a DVC project**
+::::
 
-```bash
-dvc init
+# Introducing DVC {auto-animate="true"}
+
+:::: {.columns}
+
+::: {.column width="20%"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc.jpeg)
+:::
+
+::: {.column width="80%"}
+
+- Open-source tool with a command-line interface and python API.
+- Allows **git-like** versioning of data, models and model pipelines.
+
+:::
+
+::::
+
+
+# Introducing DVC {auto-animate="true"}
+
+:::: {.columns}
+
+::: {.column width="20%"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc.jpeg)
+:::
+
+::: {.column width="80%"}
+
+- Open-source tool with a command-line interface and python API.
+- Allows **git-like** versioning of data, models and model pipelines.
+- Tracks the **metadata** of the data and models, while the actual data and models are stored **remotely** (e.g. S3, Google Drive, Azure Blob Storage, locally).
+
+:::
+
+::::
+
+## How can we use DVC? {auto-animate="true"}
+
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project]
 ```
 
-- This creates a .dvc directory. This contains a config (more on this later) file and a cache (insert screenshot of .dvc directory here).
+## How can we use DVC? {auto-animate="true"}
 
-**Add a dataset to the DVC repo**
-
-```bash
-dvc add data/lego_sets.csv
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
 ```
-- This creates a .dvc file containing the metadata of the dataset. You will also be prompted to add a .gitignore file in your data directory (this will ensure that the actual dataset is not stored in your git repository).
 
-## Setting up a remote DVC repository
+## How can we use DVC? {auto-animate="true"}
 
-**Configure DVC to use a remote storage**
-
-```bash
-dvc remote add -d /Users/gabrielleebbens/dvc-remote-storage
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
 ```
-- This configures DVC to use a remote storage.
-- The -d flag means that this is the default remote storage.
-- The path is the path to the remote storage.
 
-**Push the dataset to the remote storage**
+## How can we use DVC? {auto-animate="true"}
 
-```bash
-dvc push
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
+    C --> |dvc remote add| D(Link to remote storage)
 ```
-- This pushes the dataset to the remote storage (insert screenshot of .dvc directory here).
 
-**Pull the dataset from the remote storage**
 
-```bash
-dvc pull
+## How can we use DVC? {auto-animate="true"}
+
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
+    C --> |dvc remote add| D(Link to remote storage)
 ```
-- This pulls the latest version of the dataset from the remote storage (insert screenshot of .dvc directory here).
 
-**Checkout a previous version of the dataset**
+![](An Introduction to Data Version Control (DVC)_files/images/dvc push and pull.png){width=90%, fig-align="center"}
 
-```bash
-git checkout <commit sha>
-dvc checkout
+## How does our git know about the data?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc file.png)
+:::
+
+::: {.column width="50%"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc file contents.png){width=70%}
+:::
+
+::::
+
+::: {.smaller}
+
+- DVC uses a **.dvc** file to store the metadata of the data. This is tracked in git.
+- The **.dvc** file contains the path to the data, the hash of the data, and the hashing algorithm that was used to generate the hash.
+
+:::
+
+::: {.notes}
+
+If we're not storing the data in the git repository, how does our git know about the data? It tracks the metadata instead by using a .dvc file. The .dvc file contains the path to the data, the hash of the data, and the hash of the code that was used to generate the data. If you were to look in your dvc repository, you would see the data file at the time of this commit under that hash. This is how dvc know's which version of the data to get according to the state of the code at the time of this commit.
+:::
+
+## That's great! But can we keep track of data at different stages of the machine learning lifecycle?
+
+![](An Introduction to Data Version Control (DVC)_files/images/Schitts Creek Comedy GIF by CBC.gif){width=90%, fig-align="center"}
+
+## Yes you can with... DVC pipelines! {auto-animate="true"}
+
+## Yes you can with... DVC pipelines! {auto-animate="true"}
+
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
+    C --> |dvc remote add| D(Link to remote storage)
 ```
-- This checks out the version of the dataset that was used in the specified commit.
 
-## These are great commands! But what if I want to keep track of data at different stages of the machine learning lifecycle?
-(insert gif or meme here)
+## Yes you can with... DVC pipelines! {auto-animate="true"}
+
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
+    C --> |dvc remote add| D(Link to remote storage)
+    D --> |dvc stage add| E(Set up a dvc pipeline or DAG)
+```
+
+
+## Yes you can with... DVC pipelines! {auto-animate="true"}
+
+```{mermaid}
+flowchart LR
+    A[Setting up a DVC project] --> |dvc init| B(Initialise a DVC repository)
+    B --> |dvc add| C(Add data to be tracked) 
+    C --> |dvc remote add| D(Link to remote storage)
+    D --> |dvc stage add| E(Set up a dvc pipeline or DAG)
+```
+
+![](An Introduction to Data Version Control (DVC)_files/images/Happy Parks And Rec GIF.gif){width=90%, fig-align="center"}
 
 ## DVC pipelines
 
-- The development of a machine learning model is often made of many stages (e.g. preprocessing, featurizing, training, evaluating).
-- You could just run these commands sequentially, but who has the time for that?
-- DVC allows set up these stages in a pipeline and keep track of the dependencies, the inputs and the outputs.
-- You can then run this pipeline with a single command.
-
-**Add a stage to the DVC pipeline**
+- With dvc, you can keep track of data and models at different stages of the machine learning lifecycle.
+- By setting dependencies, you have essentially performed a `dvc add` action.
+- The data that is set as a dependency is now tracked in the dvc pipeline.
 
 ```bash
 dvc stage add -n preprocessing \
@@ -125,108 +286,284 @@ dvc stage add -n preprocessing \
   -o data/processed/preprocessed_lego_sets.csv \
   poetry run python src/preprocessing.py
 ```
+::: {.notes}
+We can use dvc stage add to set up a dvc pipeline. We name the stage, specify the dependencies, outputs, and command to run the stage.
 
-- If you are running this command for the first time, it will add a dvc yaml file and a dvc lock file.
-- Add any subsequent stages using `dvc stage add` or update the dvc.yaml file itself.
+:::
 
-## dvc.yaml and dvc.lock files
+## dvc.yaml
 
-- dvc.yaml: contains the pipeline definition
-- dvc.lock: contains the pipeline state
-(insert screenshot of dvc.yaml and dvc.lock here)
+:::: {.columns}
 
-## Updating stages and reproducing the pipeline
+::: {.column width="50%"}
 
-- This is where dvc really shines.
-- If one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it.
-- Running `dvc repro` will run the pipeline, and only the stages that need to be run will be run,
-(screenshot of output).
-- Each run of a pipeline is cached (in .dvc/cache/runs), and is utilized by `dvc repro` and `dvc exp run` (more on this later).
+![](An Introduction to Data Version Control (DVC)_files/images/dvc yaml file.png){width=90%}
+
+:::
+
+::: {.column width="50%"}
+
+- The **dvc.yaml** file contains the pipeline definition.
+- Here, you can track each stage of the pipeline, including **inputs**, **dependencies**, **outputs**, and **commands** that run the stages.
+- **No need to run individual stages manually**.
+
+:::
+
+::::
+
+::: {.notes}
+This is the file that contains the information of the pipeline. It has the names of the stages, the dependancies, the outputs, and the command to run the stage.
+:::
+
+## dvc.lock file
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](An Introduction to Data Version Control (DVC)_files/Images/dvc lock file.png)
+
+:::
+
+::: {.column width="50%"}
+
+- The **dvc.lock** file contains the metadata of the pipeline.
+- This is tracked in git along with the dvc.yaml file.
+- This is what dvc uses to know which version of the data and code to use at each stage of the pipeline.
+
+:::
+
+::: {.notes}
+This is the file that contains the metadata of the pipeline. It is tracked in git along with the dvc.yaml file. It's not overly readable but it's how dvc knows which version of the data and code to use at each stage of the pipeline.
+:::
+
+::::
+
+## Updating stages and reproducing the pipeline {auto-animate="true"}
+
+
+::: {.notes}
+
+Running dvc repro will run the pipeline. If you are running it for the first time, all stages will be run. Subsequently, if one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it. This because each run of the pipeline is cached, and dvc can see which steps have been run already. This dramatically speeds up the development cycle of your model.
+:::
+
+## Updating stages and reproducing the pipeline {auto-animate="true"}
+
+- Run `dvc repro` to run the pipeline.
+
+::: {.notes}
+
+Running dvc repro will run the pipeline. If you are running it for the first time, all stages will be run. Subsequently, if one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it. This because each run of the pipeline is cached, and dvc can see which steps have been run already. This dramatically speeds up the development cycle of your model.
+:::
+
+## Updating stages and reproducing the pipeline {auto-animate="true"}
+
+- Run `dvc repro` to run the pipeline.
+- If one of the stages in the pipeline changes, dvc will **only** run that stage and the stages that depend on it.
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc repro.png){width=90%}
+
+::: {.notes}
+
+Running dvc repro will run the pipeline. If you are running it for the first time, all stages will be run. Subsequently, if one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it. This because each run of the pipeline is cached, and dvc can see which steps have been run already. This dramatically speeds up the development cycle of your model.
+:::
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a **run cache**, where each of the runs of the pipeline is stored.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a **run cache**, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the **dvc.lock** file.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a **run cache**, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the **dvc.lock** file.
+- If the hash has changed, dvc will run the stage again.
+
+## A change in hash means a bust in cache {auto-animate="true"}
+
+- DVC has a **run cache**, where each of the runs of the pipeline is stored.
+- DVC looks at this cache and compares the hash of the dependencies to those in the **dvc.lock** file.
+- If the hash has changed, dvc will run the stage again.
+- This is true if the code that the stage depends on has changed as well.
+
+::: {.notes}
+
+Running dvc repro will run the pipeline. If you are running it for the first time, all stages will be run. Subsequently, if one of the stages in the pipeline changes, dvc will only run that stage and the stages that depend on it. This because each run of the pipeline is cached, and dvc can see which steps have been run already. This dramatically speeds up the development cycle of your model.
+:::
 
 ## DVC dag
 
-- Sometimes it is easier to visualize the pipeline rather than reading the dvc.yaml file.
-- DVC dag is a visualization of the pipeline.
-- It shows the dependencies between the stages.
-(screenshot of dvc dag)
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc dag.png){width=60%}
+
+:::
+
+::: {.column width="50%" text-align="center"}
+
+- `dvc dag` shows a vizualization of the pipeline.
+- It shows the individual stages of the pipeline and the dependancies between them.
+
+:::
+
+::::
 
 ## Parameters
 
-- Parameters are values that can be changed to control the behavior of a stage.
-  - This is helpful for hyperparameter tuning, for example.
-- Parameters are specified in a params.yaml file (you will need to create this file).
-- The code example shows how to add a stage and specify parameters.
-(show screenshot of params file)
+- Parameters can be used to **change the behaviour** of a stage in the pipeline.
+- Parameters are specified in **params.yaml** file.
+- Parameters can be added to the pipeline using the `-p` flag.
 
-```bash
-dvc stage add -n featurize \
-  -p featurize.split_ratio -p featurize.random_seed \
-  -d src/featurize.py -d data/processed/preprocessed_lego_sets.csv \
-  -o data/featurized/features_train.csv \
-  -o data/featurized/features_test.csv \
-  -o data/featurized/targets_train.csv \
-  -o data/featurized/targets_test.csv \
-  poetry run python src/featurize.py
-```
+::::{.columns}
+
+:::{.column width=50%}
+
+![](An Introduction to Data Version Control (DVC)_files/images/params.png){width=90%}
+
+:::
+
+:::{.column width=50%}
+
+![](An Introduction to Data Version Control (DVC)_files/images/dvc yaml params.png){width=90%}
+
+:::
+
+::::
+
+::: {.notes}
+You can use parameters to change the behaviour of a stage in the pipeline. Parameters are specified in params.yaml file - you will have to create this yourself. Parameters can be added to the pipeline using the `-p` flag, or you can manually specify the parameters in the dvc.yaml file. In this example, we have parameters for the random state, number of estimators, and max depth of the random forest model.
+
+:::
 
 ## Experiment tracking with DVC
 
-- DVC allows you to track experiments and compare them.
-- You can run `dvc exp run` to run an experiment.
-- You can run `dvc exp list` to list all experiments.
-- You can run `dvc exp diff` or `dvc metrics diff`to compare experiments.
-(show screenshot of output)
+- You can specify **metrics** to track in the dvc.yaml file.
+- You can then use the dvc python API to log metrics.
+
+![](An Introduction to Data Version Control (DVC)_files/images/metrics yaml.png){width=90%}
+
+```python
+from dvclive import Live
+
+with Live("data/evaluation") as live:
+    for metric, value in metrics.items():
+        live.log_metric(metric, value)
+```
+
+## Running and comparing experiments
+
+![](An Introduction to Data Version Control (DVC)_files/images/exp run.png){width=90%}
+
+![](An Introduction to Data Version Control (DVC)_files/images/metrics diff.png){width=90%}
 
 ## Experiment comparison with VSCode extension
 
-- You can use the DVC extension for VSCode to compare experiments.
-(show screenshot of VSCode extension experiment comparison)
+- DVC has a **VSCode extension** to visualize experiments and their results.
+
+![](An Introduction to Data Version Control (DVC)_files/images/vs code.png){width=90%}
+
+## Plots
+
+```python
+with Live(str(plot_dir), resume=True) as live:
+        live.log_image("feature_importance.png", fig)
+```
+![](An Introduction to Data Version Control (DVC)_files/images/plots.png){width=10%}
 
 ## Queueing up experiments in DVC
 
-- You can queue up experiments in DVC and have them run successively.
-- This can be helpful for hyperparameter tuning.
+- You can **queue up experiments** in DVC and have them run successively.
+- This can be helpful for **hyperparameter tuning**.
 
 ```bash
 dvc exp run --queue -S 'train.n_estimators=range(50, 100, 10)' -S 'train.max_depth=range(5, 10, 1)'
 ```
-(screenshot of queued experiments)
+![](An Introduction to Data Version Control (DVC)_files/images/dvc queue.png){width=90%}
 
 - You can run `dvc queue start` to kick off the experiments.
 
-## Output of experiment queue
-(screenshot of experiment queue output)
+## This is all well and good locally. But what about in the cloud? {align="center"}
 
-## This is all well and good locally. But what about in the cloud?
-(insert gif or meme here)
+![](An Introduction to Data Version Control (DVC)_files/images/Technology Cloud GIF by puraenvidia.gif){width=90% fig-align="center"}
 
-## Interaction with Cloud Services
- 
- You can integrate DVC to work with other ML Frameworks, including:
- - Amazon SageMaker
- - Databricks
- - Evidently
- - Huggingface
 
- ## Running DVC from a remote git repository
+## DVC produces generic files
+ - DVC **does not** produce file types that are **specific to a framework**. They are generic file types such as yaml, csv, pkl, etc.
+ - This means that your dvc code can be wrapped and used with other ML frameworks, including:
+    - **Amazon Sagemaker**
+    - **Databricks**
+    - **Huggingface**
+    - **Evidently**
 
- - DVC can be run in remote git environments (e.g. GitHub Actions or Bitbucket Pipelines).
- - You can setup access to your remote dvc repository in the dvc config file and run dvc commands as you would locally.
- - You can use this mechanism to automate your machine learning pipeline.
- (show screenshot of a GitHub Actions workflow or Bitbucket Pipeline)
+## An example of using DVC in the cloud
 
- ## Conclusion
+![](An Introduction to Data Version Control (DVC)_files/images/sagemaker workflow.png){width=90%}
 
- - DVC allows you to keep track of data and models in a git-like method.
- - It is used in conjunction with git to keep track of data and models.
- - It allows you to orchestrate your machine learning pipeline and keep track of the dependencies, inputs, and outputs.
- - DVC's run cache allows you to avoid running stages that have not changed, improving speed and performance.
- - DVC can be used locally or in the cloud.
- - It is a powerful tool for anyone working with data and models.
 
- ## Any questions?
+## Summary {auto-animate="true"}
 
- ## Thanks for listening! 
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+- It is used with git to keep track of **data and models**.
+
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+- It is used with git to keep track of **data and models**.
+- It allows you to **orchestrate your machine learning pipeline** and keep track of the dependencies, inputs, and outputs.
+
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+- It is used with git to keep track of **data and models**.
+- It allows you to **orchestrate your machine learning pipeline** and keep track of the dependencies, inputs, and outputs.
+- DVC's **run cache** allows you to avoid running stages that have not changed, **improving speed and performance**.
+
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+- It is used with git to keep track of **data and models**.
+- It allows you to **orchestrate your machine learning pipeline** and keep track of the dependencies, inputs, and outputs.
+- DVC's **run cache** allows you to avoid running stages that have not changed, **improving speed and performance**.
+- You can **run and track experiments** and **tune hyperparameters**.
+
+## Summary {auto-animate="true"}
+
+- DVC allows you to keep track of data and models using a **git-like** methodology.
+- It is used with git to keep track of **data and models**.
+- It allows you to **orchestrate your machine learning pipeline** and keep track of the dependencies, inputs, and outputs.
+- DVC's **run cache** allows you to avoid running stages that have not changed, **improving speed and performance**.
+- You can **run and track experiments** and **tune hyperparameters**.
+- DVC can be used **locally or in the cloud**.
+
+## Any questions?
+
+![](An Introduction to Data Version Control (DVC)_files/images/Feelings Thoughts GIF by chuber channel.gif){width=90%}
+
+## Links
+
+**DVC**
+
+- docs: https://doc.dvc.org/
+- getting started: https://github.com/treeverse/example-get-started
+
+**Socials**
+
+- GitHub: https://github.com/GabrielleEbbens
+- LinkedIn: https://www.linkedin.com/in/gabrielle-ebbens/
 
 
 
